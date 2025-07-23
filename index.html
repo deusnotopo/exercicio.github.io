@@ -1,680 +1,616 @@
-<!DOCTYPE html> <html lang="pt-br" class="scroll-smooth"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SoulGen: Guia Interativo para Alívio de Dores Articulares</title> <script src="https://cdn.tailwindcss.com"></script> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"> <style> body { font-family: 'Inter', sans-serif; background-color: #FDFBF8; color: #4A4A4A; } .gradient-text { background: linear-gradient(90deg, #8D9B6A, #C0846E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } .card { background-color: white; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 15px -1px rgb(0 0 0 / 0.06); transition: transform 0.3s, box-shadow 0.3s; } .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px -3px rgb(0 0 0 / 0.1); } .nav-link { transition: color 0.3s, border-bottom-color 0.3s; border-bottom: 2px solid transparent; } .nav-link:hover, .nav-link.active { color: #C0846E; border-bottom-color: #C0846E; } .ingredient-card.active { border-color: #8D9B6A; transform: scale(1.05); box-shadow: 0 10px 20px -3px rgb(0 0 0 / 0.1); } .product-card { display: flex; flex-direction: column; justify-content: space-between; } .ingredient-icon { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 1rem; background: linear-gradient(135deg, #8D9B6A20, #C0846E20); } .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; } .badge-popular { background-color: #C0846E; color: white; } .badge-new { background-color: #8D9B6A; color: white; } .badge-sale { background-color: #E53E3E; color: white; } .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; } .mobile-menu.open { transform: translateX(0); } .backdrop { opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; } .backdrop.open { opacity: 1; pointer-events: all; } @media (min-width: 768px) { .mobile-menu { transform: none; } } </style> </head> <body class="antialiased"> <div id="backdrop" class="backdrop fixed inset-0 bg-black/50 z-40"></div>
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>SoulGen - Guia de Exercícios para Dores Articulares</title> <script src="https://cdn.tailwindcss.com"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <style> .exercise-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); } .nav-link { position: relative; } .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #4F46E5; transition: width 0.3s ease; } .nav-link:hover::after { width: 100%; } .floating-btn { animation: float 3s ease-in-out infinite; } @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } } </style> </head> <body class="bg-gray-50 font-sans"> <!-- Header --> <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"> <div class="container mx-auto px-4 py-6"> <div class="flex flex-col md:flex-row justify-between items-center"> <div class="flex items-center mb-4 md:mb-0"> <i class="fas fa-bone text-3xl mr-3"></i> <h1 class="text-2xl md:text-3xl font-bold">SoulGen</h1> </div> <nav class="flex space-x-1 md:space-x-6"> <a href="#intro" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Introdução</a> <a href="#alivio" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Alívio Essencial</a> <a href="#recuperacao" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Recuperação Completa</a> <a href="#mobilidade" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Mobilidade Total</a> </nav> </div> </div> </header>
 
-<header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-[#4A4A4A]">
-            <span class="text-[#8D9B6A]">Soul</span><span class="text-[#C0846E]">Gen</span>
-        </h1>
-        
-        <div class="hidden md:flex items-center space-x-8">
-            <a href="#entenda" class="nav-link text-gray-600 font-medium pb-1">Entenda sua Dor</a>
-            <a href="#solucoes" class="nav-link text-gray-600 font-medium pb-1">Soluções Naturais</a>
-            <a href="#kits" class="nav-link text-gray-600 font-medium pb-1">Kits</a>
-            <a href="#produtos" class="nav-link text-gray-600 font-medium pb-1">Produtos</a>
-            <!-- Carrinho removido -->
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-indigo-50 to-purple-50 py-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Guia de Exercícios SoulGen para Dores Articulares</h1>
+                <p class="text-lg text-gray-600 mb-6">Movimento é Vida para Suas Articulações</p>
+                <a href="#intro" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300 inline-block">
+                    Comece Agora <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Exercícios para articulações" class="rounded-xl shadow-xl w-full max-w-md">
+            </div>
         </div>
-        
-        <button id="mobileMenuButton" class="md:hidden text-gray-600">
-            <i class="fas fa-bars text-2xl"></i>
-        </button>
-    </nav>
-</header>
-
-<div id="mobileMenu" class="mobile-menu fixed md:hidden top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-6 overflow-y-auto">
-    <div class="flex justify-between items-center mb-8">
-        <h2 class="text-xl font-bold text-[#4A4A4A]">
-            <span class="text-[#8D9B6A]">Soul</span><span class="text-[#C0846E]">Gen</span>
-        </h2>
-        <button id="closeMenuButton" class="text-gray-500">
-            <i class="fas fa-times text-xl"></i>
-        </button>
     </div>
-    
-    <nav class="space-y-4">
-        <a href="#entenda" class="block py-2 text-gray-600 font-medium border-b border-gray-100">Entenda sua Dor</a>
-        <a href="#solucoes" class="block py-2 text-gray-600 font-medium border-b border-gray-100">Soluções Naturais</a>
-        <a href="#kits" class="block py-2 text-gray-600 font-medium border-b border-gray-100">Kits</a>
-        <a href="#produtos" class="block py-2 text-gray-600 font-medium border-b border-gray-100">Produtos</a>
-        <!-- Carrinho removido -->
-    </nav>
-    
-    <div class="mt-8 pt-4 border-t border-gray-100">
-        <p class="text-sm text-gray-500">Ajuda e Suporte</p>
-        <a href="#" class="block mt-2 text-gray-600 hover:text-[#C0846E]">Central de Ajuda</a>
-        <a href="#" class="block mt-1 text-gray-600 hover:text-[#C0846E]">Fale Conosco</a>
-    </div>
-</div>
+</section>
 
-<main class="container mx-auto px-6 py-8 md:py-16">
-    <section id="hero" class="text-center mb-16 md:mb-24">
-        <div class="max-w-4xl mx-auto">
-            <span class="inline-block mb-4 px-4 py-1 bg-[#8D9B6A]/10 text-[#8D9B6A] rounded-full text-sm font-semibold">
-                <i class="fas fa-leaf mr-1"></i> Soluções 100% Naturais
-            </span>
-            <h2 class="text-4xl md:text-5xl font-extrabold text-[#4A4A4A] mb-4 leading-tight">
-                Recupere a Liberdade de se Movimentar <span class="gradient-text">sem Dor</span>
-            </h2>
-            <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-8">
-                Dores nas articulações e músculos não deveriam limitar sua vida. Explore nosso guia interativo e descubra como as soluções naturais da SoulGen podem ajudar você a reencontrar o conforto e o bem-estar.
+<!-- Introduction Section -->
+<section id="intro" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Introdução</h2>
+            <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+                A dor articular pode ser um obstáculo para o movimento, mas o movimento, quando feito corretamente, é uma das chaves para aliviar a dor e melhorar a saúde das suas articulações.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#solucoes" class="px-6 py-3 bg-gradient-to-r from-[#8D9B6A] to-[#C0846E] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-md">
-                    <i class="fas fa-search mr-2"></i> Explorar Soluções
-                </a>
-                <a href="#produtos" class="px-6 py-3 bg-white text-[#4A4A4A] font-bold rounded-lg hover:bg-gray-50 transition-colors border border-gray-200 shadow-md">
-                    <i class="fas fa-shopping-bag mr-2"></i> Ver Produtos
-                </a>
+        </div>
+        
+        <div class="bg-indigo-50 rounded-xl p-8 mb-12">
+            <div class="flex items-start">
+                <i class="fas fa-exclamation-circle text-indigo-600 text-2xl mt-1 mr-4"></i>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Atenção Importante</h3>
+                    <p class="text-gray-700">
+                        Este guia foi criado para complementar os Kits SoulGen para Dores Articulares, oferecendo sugestões de exercícios adaptadas a cada fase do seu tratamento. Lembre-se: A consistência é fundamental. Comece devagar, ouça seu corpo e, se sentir dor, pare. É sempre recomendável consultar um médico ou fisioterapeuta antes de iniciar qualquer nova rotina de exercícios, especialmente se você tiver condições pré-existentes ou dores intensas.
+                    </p>
+                </div>
             </div>
         </div>
         
-        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div class="ingredient-icon">
-                    <i class="fas fa-heart text-[#8D9B6A] text-xl"></i>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-indigo-200 transition duration-300">
+                <div class="text-indigo-600 text-4xl mb-4">
+                    <i class="fas fa-walking"></i>
                 </div>
-                <p class="font-semibold">+5.000</p>
-                <p class="text-sm text-gray-500">Clientes Satisfeitos</p>
+                <h3 class="text-xl font-semibold mb-3">Movimento Suave</h3>
+                <p class="text-gray-600">Exercícios de baixo impacto para iniciar o processo de recuperação sem sobrecarregar as articulações.</p>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div class="ingredient-icon">
-                    <i class="fas fa-seedling text-[#8D9B6A] text-xl"></i>
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-indigo-200 transition duration-300">
+                <div class="text-indigo-600 text-4xl mb-4">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <p class="font-semibold">100%</p>
-                <p class="text-sm text-gray-500">Ingredientes Naturais</p>
+                <h3 class="text-xl font-semibold mb-3">Progressão Gradual</h3>
+                <p class="text-gray-600">Aumente a intensidade dos exercícios conforme seu corpo se adapta e fortalece.</p>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div class="ingredient-icon">
-                    <i class="fas fa-truck text-[#8D9B6A] text-xl"></i>
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-indigo-200 transition duration-300">
+                <div class="text-indigo-600 text-4xl mb-4">
+                    <i class="fas fa-heartbeat"></i>
                 </div>
-                <p class="font-semibold">Entrega</p>
-                <p class="text-sm text-gray-500">Para Todo Brasil</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div class="ingredient-icon">
-                    <i class="fas fa-headset text-[#8D9B6A] text-xl"></i>
-                </div>
-                <p class="font-semibold">Suporte</p>
-                <p class="text-sm text-gray-500">Especializado</p>
+                <h3 class="text-xl font-semibold mb-3">Saúde Integral</h3>
+                <p class="text-gray-600">Combinação de movimento, nutrição e suplementação para resultados duradouros.</p>
             </div>
         </div>
-    </section>
-
-    <div class="space-y-20 md:space-y-32">
-        <section id="entenda">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-[#4A4A4A] mb-3">1. Entenda a Raiz da sua Dor</h3>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    A dor articular geralmente não surge do nada. Ela é resultado de um ciclo que envolve inflamação, desgaste e tensão. Compreender essas causas é o primeiro passo para encontrar a solução certa.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-fire text-[#C0846E] text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-2">Inflamação</h4>
-                    <p class="text-gray-600">É a resposta do corpo a lesões ou estresse, causando dor, inchaço e rigidez. Ingredientes como a Cúrcuma são essenciais para combatê-la.</p>
-                </div>
-                <div class="card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-bone text-[#8D9B6A] text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-2">Desgaste da Cartilagem</h4>
-                    <p class="text-gray-600">Com o tempo, a cartilagem que protege as articulações pode se desgastar. Colágeno UC-II e Condroitina ajudam a nutrir e proteger esse tecido vital.</p>
-                </div>
-                <div class="card">
-                    <div class="ingredient-icon">
-                        <i class="fas fa-dumbbell text-[#4A4A4A] text-2xl"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-2">Tensão Muscular</h4>
-                    <p class="text-gray-600">Músculos tensos ao redor da articulação aumentam a pressão e a dor. O Magnésio é fundamental para o relaxamento e a função muscular adequada.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="solucoes">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-[#4A4A4A] mb-3">2. Soluções que Vêm da Natureza</h3>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    A natureza oferece aliados poderosos para a saúde das suas articulações. Clique em cada ingrediente para descobrir seus benefícios e ver os produtos SoulGen que os contêm.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-4">
-                    <div id="ingredientsList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4">
-                    </div>
-                </div>
-                <div class="lg:col-span-8">
-                    <div id="ingredientDetails" class="card min-h-[300px] sticky top-28">
-                        <div id="detailsContent" class="space-y-4">
-                            <div class="flex items-center mb-4">
-                                <div class="ingredient-icon">
-                                    <i class="fas fa-search text-[#8D9B6A] text-xl"></i>
-                                </div>
-                                <h4 id="detailsTitle" class="text-2xl font-bold ml-4">Selecione um Ingrediente</h4>
-                            </div>
-                            <p class="text-gray-600">Clique em um ingrediente ao lado para ver como ele pode te ajudar e quais dos nossos produtos o contêm.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="kits">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-[#4A4A4A] mb-3">3. Nossos Kits Recomendados</h3>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    Para facilitar sua jornada, criamos kits que combinam os melhores ingredientes para diferentes necessidades. Escolha o que mais se adapta a você.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card flex flex-col relative">
-                    <div class="absolute top-4 right-4">
-                        <span class="badge badge-new">Economize 15%</span>
-                    </div>
-                    <h4 class="text-xl font-bold mb-2 text-[#8D9B6A]">Kit Alívio Essencial</h4>
-                    <p class="text-gray-600 mb-4 flex-grow">Ideal para dores leves e para quem está começando. Foco em reduzir a inflamação e oferecer alívio rápido.</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-6">
-                        <li>Cúrcuma em Cápsulas</li>
-                        <li>Cloreto de Magnésio</li>
-                        <li>Gel Canela de Velho (Uso Tópico)</li>
-                    </ul>
-                    <div class="mb-4">
-                        <span class="text-sm text-gray-500 line-through">R$ 30,95</span>
-                        <span class="text-xl font-bold text-[#8D9B6A] ml-2">R$ 26,30</span>
-                    </div>
-                    <div class="mt-auto block w-full text-left py-2 px-4">
-                        <p class="text-sm text-gray-700 font-semibold mb-1">Como usar:</p>
-                        <ul class="list-disc list-inside text-xs text-gray-600 mb-2">
-                            <li>Consulte um profissional de saúde antes de iniciar.</li>
-                            <li>Use conforme orientação do rótulo ou nutricionista.</li>
-                            <li>Combine com exercícios do nosso guia.</li>
-                        </ul>
-                        <a href="#guia-exercicios" class="text-[#8D9B6A] underline text-xs font-bold">Ver Guia de Exercícios</a>
-                    </div>
-                </div>
-                <div class="card flex flex-col border-2 border-[#C0846E] relative">
-                    <div class="absolute top-4 right-4">
-                        <span class="badge badge-popular">Mais Popular</span>
-                    </div>
-                    <h4 class="text-xl font-bold mb-2 text-[#C0846E]">Kit Recuperação Completa</h4>
-                    <p class="text-gray-600 mb-4 flex-grow">Para dores persistentes. Foco na regeneração da cartilagem e proteção articular a longo prazo.</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-6">
-                        <li>Condro 1000</li>
-                        <li>Colágeno UC II</li>
-                        <li>Ômega 3 (Óleo de Peixe)</li>
-                        <li>Dimalato de Magnésio</li>
-                    </ul>
-                    <div class="mb-4">
-                        <span class="text-sm text-gray-500 line-through">R$ 63,45</span>
-                        <span class="text-xl font-bold text-[#C0846E] ml-2">R$ 56,90</span>
-                    </div>
-                    <div class="mt-auto block w-full text-left py-2 px-4">
-                        <p class="text-sm text-gray-700 font-semibold mb-1">Como usar:</p>
-                        <ul class="list-disc list-inside text-xs text-gray-600 mb-2">
-                            <li>Consulte um profissional de saúde antes de iniciar.</li>
-                            <li>Use conforme orientação do rótulo ou nutricionista.</li>
-                            <li>Combine com exercícios do nosso guia.</li>
-                        </ul>
-                        <a href="#guia-exercicios" class="text-[#C0846A] underline text-xs font-bold">Ver Guia de Exercícios</a>
-                    </div>
-                </div>
-                <div class="card flex flex-col relative">
-                    <div class="absolute top-4 right-4">
-                        <span class="badge badge-sale">Oferta Limitada</span>
-                    </div>
-                    <h4 class="text-xl font-bold mb-2 text-[#4A4A4A]">Kit Mobilidade Total</h4>
-                    <p class="text-gray-600 mb-4 flex-grow">A solução mais avançada para suporte máximo, otimizando a saúde óssea e o bem-estar geral.</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-6">
-                        <li>Combinação de todos os kits</li>
-                        <li>+ Extra Cálcio MDK2</li>
-                        <li>+ Guia de Exercícios</li>
-                    </ul>
-                    <div class="mb-4">
-                        <span class="text-sm text-gray-500 line-through">R$ 89,90</span>
-                        <span class="text-xl font-bold text-[#4A4A4A] ml-2">R$ 79,90</span>
-                    </div>
-                    <div class="mt-auto block w-full text-left py-2 px-4">
-                        <p class="text-sm text-gray-700 font-semibold mb-1">Como usar:</p>
-                        <ul class="list-disc list-inside text-xs text-gray-600 mb-2">
-                            <li>Consulte um profissional de saúde antes de iniciar.</li>
-                            <li>Use conforme orientação do rótulo ou nutricionista.</li>
-                            <li>Combine com exercícios do nosso guia.</li>
-                        </ul>
-                        <a href="#guia-exercicios" class="text-[#4A4A4A] underline text-xs font-bold">Ver Guia de Exercícios</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="produtos">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold text-[#4A4A4A] mb-3">4. Encontre seu Produto Ideal</h3>
-                <p class="max-w-3xl mx-auto text-gray-600 mb-6">
-                    Explore nosso catálogo de produtos selecionados para a saúde articular. Use a busca para encontrar exatamente o que você precisa.
-                </p>
-                <div class="relative max-w-lg mx-auto">
-                    <input type="text" id="productSearch" placeholder="Buscar por nome ou ingrediente (ex: Cúrcuma)" class="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#8D9B6A] focus:outline-none">
-                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                </div>
-            </div>
-            
-            <div class="mb-8 flex flex-wrap gap-2 justify-center">
-                <button class="filter-btn px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors active" data-filter="all">
-                    Todos
-                </button>
-                <button class="filter-btn px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors" data-filter="antiinflamatorio">
-                    Anti-inflamatórios
-                </button>
-                <button class="filter-btn px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors" data-filter="regeneracao">
-                    Regeneração
-                </button>
-                <button class="filter-btn px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors" data-filter="relaxante">
-                    Relaxantes
-                </button>
-                <button class="filter-btn px-4 py-2 bg-white text-gray-700 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors" data-filter="topico">
-                    Tópicos
-                </button>
-            </div>
-            
-            <div id="productList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            </div>
-            <p id="noResults" class="text-center text-gray-500 mt-8 hidden">Nenhum produto encontrado. Tente ajustar sua busca.</p>
-        </section>
     </div>
-</main>
+</section>
 
-<section class="bg-[#8D9B6A]/10 py-16 mt-20">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-3xl font-bold text-[#4A4A4A] mb-6">Dicas para um Estilo de Vida Saudável</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="ingredient-icon mb-4">
-                        <i class="fas fa-utensils text-[#8D9B6A] text-xl"></i>
+<!-- Kit Alívio Essencial -->
+<section id="alivio" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-1 rounded-full mb-3">Fase 1</span>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Guia de Exercícios para o Kit Alívio Essencial</h2>
+            <div class="w-20 h-1 bg-indigo-600 mx-auto mb-6"></div>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-gray-600 mb-4 text-lg">
+                    <span class="font-semibold text-indigo-600">Propósito do Kit:</span> Para quem está começando a sentir dores leves ou quer um alívio inicial e natural. Foco na redução da inflamação e suporte básico.
+                </p>
+                <p class="text-gray-600 text-lg">
+                    <span class="font-semibold text-indigo-600">Tipo de Exercícios Recomendados:</span> Movimentos suaves, de baixo impacto, focados em melhorar a amplitude de movimento e reduzir a rigidez. O objetivo é "lubrificar" as articulações e melhorar a circulação sem sobrecarregá-las.
+                </p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- Exercise 1 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Caminhada Leve</h3>
                     </div>
-                    <h4 class="text-lg font-semibold mb-2">Alimentação Anti-inflamatória</h4>
-                    <p class="text-gray-600 text-sm">Inclua alimentos como peixes gordurosos, nozes, sementes e vegetais verde-escuros em sua dieta para reduzir a inflamação naturalmente.</p>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-indigo-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Comece com 10-15 minutos de caminhada em terreno plano, em um ritmo confortável. Aumente gradualmente para 30 minutos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-indigo-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Melhora a circulação, fortalece músculos das pernas e quadris, e ajuda na lubrificação das articulações dos joelhos e tornozelos.</p>
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="ingredient-icon mb-4">
-                        <i class="fas fa-water text-[#8D9B6A] text-xl"></i>
-                    </div>
-                    <h4 class="text-lg font-semibold mb-2">Hidratação Adequada</h4>
-                    <p class="text-gray-600 text-sm">A água ajuda a manter as articulações lubrificadas. Beba pelo menos 2 litros por dia, mais se você pratica exercícios.</p>
+                <div class="bg-indigo-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-indigo-600 font-medium">
+                        <i class="fas fa-clock mr-1"></i> Duração: 10-30 min
+                    </span>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm">
-                    <div class="ingredient-icon mb-4">
-                        <i class="fas fa-walking text-[#8D9B6A] text-xl"></i>
+            </div>
+            
+            <!-- Exercise 2 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Rotações Articulares Suaves</h3>
                     </div>
-                    <h4 class="text-lg font-semibold mb-2">Movimento Regular</h4>
-                    <p class="text-gray-600 text-sm">Atividades de baixo impacto como caminhada, natação ou yoga mantêm as articulações móveis e os músculos fortes.</p>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-indigo-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <ul class="text-gray-600 pl-6 list-disc ml-4">
+                            <li class="mb-1"><span class="font-medium">Ombros:</span> Gire os ombros para frente e para trás (5-10 vezes cada direção).</li>
+                            <li class="mb-1"><span class="font-medium">Pescoço:</span> Gire a cabeça suavemente de um lado para o outro, depois incline a orelha em direção ao ombro (5-10 vezes cada lado).</li>
+                            <li><span class="font-medium">Punhos e Tornozelos:</span> Faça círculos com punhos e tornozelos (10 vezes cada direção).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-indigo-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Aumenta a amplitude de movimento e reduz a rigidez nas pequenas articulações.</p>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-indigo-600 font-medium">
+                        <i class="fas fa-clock mr-1"></i> Duração: 5-10 min
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 3 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Alongamento de Isquiotibiais (Deitado)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-indigo-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Deite-se de costas, com uma perna esticada. Segure a coxa da outra perna com as mãos e puxe o joelho em direção ao peito. Lentamente, estique a perna para cima, mantendo o joelho ligeiramente flexionado. Mantenha por 15-30 segundos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-indigo-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Alivia a tensão na parte de trás da coxa que pode afetar a dor no joelho e quadril.</p>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-indigo-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Repetições: 2-3 vezes por perna
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 4 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">4</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Alongamento de Quadríceps (Em Pé, com Apoio)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-indigo-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fique em pé, segurando-se em uma parede ou cadeira. Dobre uma perna para trás e segure o tornozelo com a mão, puxando o calcanhar em direção ao glúteo. Mantenha por 15-30 segundos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-indigo-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Alonga os músculos da parte frontal da coxa, que podem tensionar o joelho.</p>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-indigo-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Repetições: 2-3 vezes por perna
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer class="bg-gray-800 text-white mt-20">
-    <div class="container mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-                <h4 class="text-lg font-bold mb-4">
-                    <span class="text-[#8D9B6A]">Soul</span><span class="text-[#C0846E]">Gen</span>
-                </h4>
-                <p class="text-gray-300 text-sm">Soluções naturais para uma vida sem dores articulares e com mais bem-estar.</p>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-4">Navegação</h5>
-                <ul class="space-y-2">
-                    <li><a href="#entenda" class="text-gray-300 hover:text-white transition-colors">Entenda sua Dor</a></li>
-                    <li><a href="#solucoes" class="text-gray-300 hover:text-white transition-colors">Soluções Naturais</a></li>
-                    <li><a href="#kits" class="text-gray-300 hover:text-white transition-colors">Kits</a></li>
-                    <li><a href="#produtos" class="text-gray-300 hover:text-white transition-colors">Produtos</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-4">Institucional</h5>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Sobre Nós</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Blog</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Depoimentos</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contato</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-semibold mb-4">Atendimento</h5>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-300">
-                        <i class="fas fa-phone-alt mr-2 text-sm"></i>
-                        <span>(11) 1234-5678</span>
-                    </li>
-                    <li class="flex items-center text-gray-300">
-                        <i class="fas fa-envelope mr-2 text-sm"></i>
-                        <span>contato@soulgen.com.br</span>
-                    </li>
-                    <li class="flex items-center text-gray-300">
-                        <i class="fas fa-clock mr-2 text-sm"></i>
-                        <span>Seg-Sex: 9h-18h</span>
-                    </li>
-                </ul>
+<!-- Kit Recuperação Completa -->
+<section id="recuperacao" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-purple-100 text-purple-800 text-sm font-semibold px-4 py-1 rounded-full mb-3">Fase 2</span>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Guia de Exercícios para o Kit Recuperação Completa</h2>
+            <div class="w-20 h-1 bg-purple-600 mx-auto mb-6"></div>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-gray-600 mb-4 text-lg">
+                    <span class="font-semibold text-purple-600">Propósito do Kit:</span> Para quem sofre com dores persistentes e busca uma solução mais robusta, focada na regeneração da cartilagem e na proteção das articulações a longo prazo.
+                </p>
+                <p class="text-gray-600 text-lg">
+                    <span class="font-semibold text-purple-600">Tipo de Exercícios Recomendados:</span> Fortalecimento muscular moderado e de baixo impacto, que suporta as articulações, além de exercícios de flexibilidade para melhorar a estabilidade e a mobilidade.
+                </p>
             </div>
         </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
-            <p>&copy; 2025 SoulGen - Todos os direitos reservados. As informações neste site não substituem a consulta médica.</p>
-            <p class="mt-2">Formas de pagamento: <i class="fab fa-cc-visa ml-2"></i> <i class="fab fa-cc-mastercard ml-1"></i> <i class="fab fa-cc-paypal ml-1"></i> <i class="fas fa-barcode ml-1"></i></p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- Exercise 1 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-purple-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 text-purple-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Agachamento na Parede (Wall Squat)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-purple-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Encoste as costas na parede e deslize para baixo até que seus joelhos estejam em um ângulo de 90 graus (ou menos, se for doloroso). Mantenha por 20-30 segundos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-purple-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fortalece quadríceps, glúteos e isquiotibiais, que dão suporte aos joelhos.</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-purple-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Repetições: 3-5 vezes
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 2 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-purple-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 text-purple-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Elevação de Calcanhares (Calf Raises)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-purple-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Em pé, com apoio, levante-se nas pontas dos pés, contraindo as panturrilhas. Abaixe lentamente. Faça 2-3 séries de 10-15 repetições.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-purple-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fortalece os músculos da panturrilha, importantes para a estabilidade do tornozelo e joelho.</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-purple-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Séries: 2-3 de 10-15 reps
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 3 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-purple-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 text-purple-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Ponte (Bridge)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-purple-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Deite-se de costas com os joelhos flexionados e os pés no chão, na largura dos quadris. Levante os quadris do chão até formar uma linha reta dos ombros aos joelhos. Mantenha por alguns segundos e abaixe. Faça 2-3 séries de 10-15 repetições.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-purple-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fortalece glúteos e músculos do core, que suportam a coluna e os quadris.</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-purple-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Séries: 2-3 de 10-15 reps
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 4 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-purple-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 text-purple-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">4</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Yoga ou Pilates Suave</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-purple-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Procure aulas ou vídeos online focados em iniciantes ou pessoas com dores articulares.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-purple-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Melhora a flexibilidade, o equilíbrio, a força do core e a consciência corporal, tudo de forma controlada e com baixo impacto.</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-purple-600 font-medium">
+                        <i class="fas fa-clock mr-1"></i> Duração: 20-45 min
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Kit Mobilidade Total Premium -->
+<section id="mobilidade" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <span class="inline-block bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-1 rounded-full mb-3">Fase 3</span>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Guia de Exercícios para o Kit Mobilidade Total Premium</h2>
+            <div class="w-20 h-1 bg-teal-600 mx-auto mb-6"></div>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-gray-600 mb-4 text-lg">
+                    <span class="font-semibold text-teal-600">Propósito do Kit:</span> A solução mais completa e avançada para quem busca o máximo de suporte para suas articulações, otimizando a saúde óssea e o bem-estar geral.
+                </p>
+                <p class="text-gray-600 text-lg">
+                    <span class="font-semibold text-teal-600">Tipo de Exercícios Recomendados:</span> Exercícios funcionais, que desafiam a força e o equilíbrio, mantendo a amplitude de movimento e a estabilidade. Pode incluir atividades mais dinâmicas, desde que não causem dor.
+                </p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- Exercise 1 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-teal-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Prancha (Plank)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-teal-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Apoie-se nos antebraços e nas pontas dos pés, mantendo o corpo reto como uma tábua. Contraia o abdômen e os glúteos. Mantenha por 30-60 segundos. Faça 2-3 repetições.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-teal-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fortalece o core (abdômen e lombar), essencial para a stabilidade de todo o corpo e redução da carga sobre as articulações.</p>
+                    </div>
+                </div>
+                <div class="bg-teal-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-teal-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Repetições: 2-3 vezes
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 2 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-teal-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Afundo (Lunge) com Apoio</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-teal-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Em pé, dê um passo à frente com uma perna e abaixe o quadril até que ambos os joelhos formem um ângulo de 90 graus. Mantenha o tronco reto. Use uma cadeira ou parede para apoio se necessário. Faça 2-3 séries de 8-12 repetições por perna.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-teal-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Fortalece pernas e glúteos de forma unilateral, melhorando o equilíbrio e a força funcional.</p>
+                    </div>
+                </div>
+                <div class="bg-teal-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-teal-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Séries: 2-3 de 8-12 reps
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 3 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-teal-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Natação ou Hidroginástica</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-teal-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Pratique natação ou participe de aulas de hidroginástica.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-teal-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">A água reduz o impacto nas articulações, permitindo um treino completo de força e cardiovascular sem sobrecarga. Ideal para manter a mobilidade e fortalecer os músculos de forma segura.</p>
+                    </div>
+                </div>
+                <div class="bg-teal-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-teal-600 font-medium">
+                        <i class="fas fa-clock mr-1"></i> Duração: 30-45 min
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Exercise 4 -->
+            <div class="exercise-card bg-white rounded-xl shadow-md overflow-hidden transition duration-300 border border-teal-100">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-800 rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                            <span class="font-bold">4</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">Exercícios com Faixas de Resistência (Leve)</h3>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-info-circle text-teal-500 mr-2"></i> Como fazer:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Use faixas elásticas para exercícios como abdução de quadril (elevar a perna para o lado), extensão de perna ou remada.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-heart text-teal-500 mr-2"></i> Benefício:
+                        </h4>
+                        <p class="text-gray-600 pl-6">Adiciona resistência controlada para fortalecer músculos específicos ao redor das articulações, melhorando a estabilidade e a força sem o impacto de pesos livres.</p>
+                    </div>
+                </div>
+                <div class="bg-teal-50 px-6 py-3 flex justify-end">
+                    <span class="text-sm text-teal-600 font-medium">
+                        <i class="fas fa-redo mr-1"></i> Séries: 2-3 de 10-15 reps
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final Tips Section -->
+<section class="py-16 bg-indigo-600 text-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">Lembre-se Sempre</h2>
+            <div class="w-20 h-1 bg-white mx-auto mb-6"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                <div class="text-3xl mb-4">
+                    <i class="fas fa-turtle"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Progressão Lenta</h3>
+                <p>Aumente a intensidade, duração ou repetições gradualmente.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                <div class="text-3xl mb-4">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Dor é um Sinal</h3>
+                <p>Se sentir dor aguda ou persistente, pare o exercício.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                <div class="text-3xl mb-4">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Consistência</h3>
+                <p>Faça dos exercícios uma parte regular da sua rotina.</p>
+            </div>
+            <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                <div class="text-3xl mb-4">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Hidratação e Nutrição</h3>
+                <p>Continue com a suplementação SoulGen e uma dieta balanceada para apoiar seus resultados.</p>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <p class="text-xl mb-6 max-w-3xl mx-auto">
+                Com o apoio dos Kits SoulGen e uma rotina de exercícios adaptada, você estará no caminho certo para recuperar a liberdade de movimento e viver sem as limitações das dores articulares.
+            </p>
+            <a href="#" class="bg-white text-indigo-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition duration-300 inline-block">
+                Conheça Nossos Kits <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Floating Action Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="#" class="floating-btn bg-indigo-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 transition duration-300">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </a>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <div class="mb-8 md:mb-0">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-bone text-2xl mr-3"></i>
+                    <h3 class="text-xl font-bold">SoulGen</h3>
+                </div>
+                <p class="text-gray-400 max-w-xs">Sua jornada para articulações saudáveis e sem dor começa aqui.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#intro" class="text-gray-400 hover:text-white transition">Introdução</a></li>
+                        <li><a href="#alivio" class="text-gray-400 hover:text-white transition">Alívio Essencial</a></li>
+                        <li><a href="#recuperacao" class="text-gray-400 hover:text-white transition">Recuperação Completa</a></li>
+                        <li><a href="#mobilidade" class="text-gray-400 hover:text-white transition">Mobilidade Total</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contato</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400"><i class="fas fa-envelope mr-2"></i> contato@soulgen.com</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-phone mr-2"></i> (11) 1234-5678</li>
+                        <li class="flex items-center text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-whatsapp text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2023 SoulGen. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const closeMenuButton = document.getElementById('closeMenuButton');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const backdrop = document.getElementById('backdrop');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('open');
-            backdrop.classList.add('open');
-        });
-        
-        closeMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            backdrop.classList.remove('open');
-        });
-        
-        backdrop.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            backdrop.classList.remove('open');
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Close mobile menu if open
-                mobileMenu.classList.remove('open');
-                backdrop.classList.remove('open');
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Highlight active nav link on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        window.addEventListener('scroll', () => {
-            let current = '';
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (pageYOffset >= (sectionTop - 150)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
             });
         });
-        
-        // Ingredients and products data
-        const ingredients = [
-            { 
-                id: 'curcuma', 
-                name: 'Cúrcuma', 
-                icon: 'fas fa-fire', 
-                description: 'Um potente anti-inflamatório natural, a Cúrcuma é essencial para reduzir a dor e o inchaço nas articulações, sendo um dos suplementos mais estudados para artrite e dores crônicas. Seu composto ativo, a curcumina, inibe várias moléculas que desempenham um papel na inflamação.',
-                category: 'antiinflamatorio'
-            },
-            { 
-                id: 'colageno', 
-                name: 'Colágeno UC-II', 
-                icon: 'fas fa-bone', 
-                description: 'É o principal tipo de colágeno encontrado nas cartilagens. A suplementação com UC-II ajuda a "ensinar" o sistema imunológico a não atacar a cartilagem, reduzindo a dor e promovendo a reparação articular. Estudos mostram que pode reduzir a dor em até 40% em 90 dias de uso.',
-                category: 'regeneracao'
-            },
-            { 
-                id: 'magnesio', 
-                name: 'Magnésio', 
-                icon: 'fas fa-water', 
-                description: 'Este mineral é vital para mais de 300 processos no corpo, incluindo a função muscular e nervosa. Ajuda a aliviar cãibras, espasmos e a tensão muscular que agravam a dor articular. A deficiência de magnésio é comum e pode piorar a sensibilidade à dor.',
-                category: 'relaxante'
-            },
-            { 
-                id: 'condroitina', 
-                name: 'Condroitina', 
-                icon: 'fas fa-shield-alt', 
-                description: 'Um componente estrutural da cartilagem, a Condroitina ajuda a reter água, garantindo a lubrificação e a absorção de impacto nas articulações. É frequentemente combinada com glucosamina. Estudos mostram que pode reduzir a progressão da osteoartrite.',
-                category: 'regeneracao'
-            },
-            { 
-                id: 'omega3', 
-                name: 'Ômega 3', 
-                icon: 'fas fa-fish', 
-                description: 'Os ácidos graxos do Ômega 3, encontrados no óleo de peixe, são poderosos anti-inflamatórios sistêmicos. Eles ajudam a reduzir a inflamação em todo o corpo, aliviando a rigidez e a dor articular. Também protegem a saúde cardiovascular, importante para quem tem mobilidade reduzida.',
-                category: 'antiinflamatorio'
-            },
-            { 
-                id: 'andiroba', 
-                name: 'Óleo de Andiroba', 
-                icon: 'fas fa-spa', 
-                description: 'Nativo da Amazônia, este óleo é usado topicamente para um alívio rápido. Suas propriedades analgésicas e anti-inflamatórias o tornam excelente para massagens em áreas doloridas. Também melhora a circulação local, acelerando a recuperação de lesões.',
-                category: 'topico'
-            }
-        ];
-
-        const products = [
-            { name: "Cúrcuma", description: "60 caps. 500mg", price: "10.80", ingredients: ['curcuma'], category: 'antiinflamatorio', badge: '' },
-            { name: "Cloreto de Magnésio", description: "120 caps. 500mg", price: "13.25", ingredients: ['magnesio'], category: 'relaxante', badge: '' },
-            { name: "Cloreto de Magnésio + Cúrcuma", description: "120 caps. 500mg", price: "15.80", ingredients: ['curcuma', 'magnesio'], category: 'antiinflamatorio', badge: 'popular' },
-            { name: "Condro 1000", description: "120 caps. 500mg", price: "21.30", ingredients: ['condroitina'], category: 'regeneracao', badge: '' },
-            { name: "Colágeno UC II", description: "30 caps. 500mg", price: "11.50", ingredients: ['colageno'], category: 'regeneracao', badge: '' },
-            { name: "Curcuma + UC2", description: "30 caps. 750mg", price: "13.50", ingredients: ['curcuma', 'colageno'], category: 'antiinflamatorio', badge: 'new' },
-            { name: "Dimalato de Magnésio", description: "100 caps. 500mg", price: "12.10", ingredients: ['magnesio'], category: 'relaxante', badge: '' },
-            { name: "Extra Cálcio MDK2", description: "120 caps. 500mg", price: "12.75", ingredients: [], category: 'regeneracao', badge: '' },
-            { name: "Magnesio 4 em 1", description: "30 caps. 750mg", price: "12.50", ingredients: ['magnesio'], category: 'relaxante', badge: '' },
-            { name: "OSTFLEX D3 *NOVIDADE*", description: "60 CAPS", price: "15.90", ingredients: [], category: 'regeneracao', badge: 'new' },
-            { name: "Vit k2 +Colágeno tipo 2 +Cloreto", description: "60 caps. 500mg", price: "10.90", ingredients: ['colageno', 'magnesio'], category: 'regeneracao', badge: '' },
-            { name: "Óleo de Peixe (OMEGA3)", description: "120 caps. 1400mg", price: "35.90", ingredients: ['omega3'], category: 'antiinflamatorio', badge: '' },
-            { name: "Óleo de Copaíba", description: "30 ml", price: "7.95", ingredients: ['andiroba'], category: 'topico', badge: '' },
-            { name: "Gel Canela de Velho c/Ora Pro Nóbis", description: "150g", price: "6.30", ingredients: ['andiroba'], category: 'topico', badge: 'sale' }
-        ];
-
-        // DOM elements
-        const ingredientsListEl = document.getElementById('ingredientsList');
-        const detailsTitleEl = document.getElementById('detailsTitle');
-        const detailsContentEl = document.getElementById('detailsContent');
-        const productListEl = document.getElementById('productList');
-        const productSearchEl = document.getElementById('productSearch');
-        const noResultsEl = document.getElementById('noResults');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-
-        let activeIngredient = null;
-        let activeFilter = 'all';
-
-        // Render ingredients list
-        function renderIngredients() {
-            ingredientsListEl.innerHTML = '';
-            ingredients.forEach(ing => {
-                const card = document.createElement('div');
-                card.className = 'ingredient-card card text-center p-4 border-2 border-transparent cursor-pointer';
-                card.innerHTML = `
-                    <div class="ingredient-icon">
-                        <i class="${ing.icon} text-[#8D9B6A] text-xl"></i>
-                    </div>
-                    <h5 class="font-semibold">${ing.name}</h5>
-                `;
-                card.addEventListener('click', () => {
-                    activeIngredient = ing.id;
-                    updateActiveIngredient();
-                    renderIngredientDetails(ing);
-                });
-                ingredientsListEl.appendChild(card);
-            });
+    });
+    
+    // Show/hide floating button based on scroll position
+    window.addEventListener('scroll', function() {
+        const floatingBtn = document.querySelector('.floating-btn');
+        if (window.scrollY > 300) {
+            floatingBtn.classList.remove('hidden');
+            floatingBtn.classList.add('block');
+        } else {
+            floatingBtn.classList.add('hidden');
+            floatingBtn.classList.remove('block');
         }
-
-        // Update active ingredient styling
-        function updateActiveIngredient() {
-            const cards = document.querySelectorAll('.ingredient-card');
-            cards.forEach((card, index) => {
-                if (ingredients[index].id === activeIngredient) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-        }
-
-        // Render detailed ingredient view
-        function renderIngredientDetails(ingredient) {
-            detailsTitleEl.textContent = ingredient.name;
-            
-            const relatedProducts = products.filter(p => p.ingredients.includes(ingredient.id));
-            let productsHTML = '<p class="text-gray-500">Nenhum produto encontrado para este ingrediente.</p>';
-            
-            if (relatedProducts.length > 0) {
-                productsHTML = relatedProducts.map(p => `
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-md hover:bg-gray-100 transition-colors">
-                        <div>
-                            <span class="font-medium">${p.name}</span>
-                            <span class="block text-sm text-gray-500">${p.description}</span>
-                        </div>
-                        <span class="text-lg font-bold text-[#8D9B6A]">R$${p.price.replace('.',',')}</span>
-                    </div>
-                `).join('');
-            }
-
-            detailsContentEl.innerHTML = `
-                <div class="flex items-center mb-4">
-                    <div class="ingredient-icon">
-                        <i class="${ingredient.icon} text-[#8D9B6A] text-2xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold ml-4">${ingredient.name}</h4>
-                </div>
-                <p class="text-gray-600 mb-6">${ingredient.description}</p>
-                <h5 class="font-bold text-lg mb-3">Produtos SoulGen Relacionados:</h5>
-                <div class="space-y-3">${productsHTML}</div>
-            `;
-        }
-
-        // Render products with optional filter
-        function renderProducts(filter = '', category = 'all') {
-            const searchTerm = filter.toLowerCase();
-            let filteredProducts = products.filter(p => 
-                (p.name.toLowerCase().includes(searchTerm) || 
-                p.ingredients.some(ingId => ingredients.find(i => i.id === ingId)?.name.toLowerCase().includes(searchTerm)))
-            );
-            
-            // Apply category filter
-            if (category !== 'all') {
-                filteredProducts = filteredProducts.filter(p => p.category === category);
-            }
-
-            productListEl.innerHTML = '';
-            
-            if (filteredProducts.length === 0) {
-                noResultsEl.classList.remove('hidden');
-            } else {
-                noResultsEl.classList.add('hidden');
-            }
-
-            filteredProducts.forEach(p => {
-                const badge = p.badge ? `<span class="badge badge-${p.badge} absolute top-3 right-3">${
-                    p.badge === 'popular' ? 'Popular' : 
-                    p.badge === 'new' ? 'Novidade' : 
-                    p.badge === 'sale' ? 'Oferta' : ''
-                }</span>` : '';
-                
-                const card = document.createElement('div');
-                card.className = 'card product-card relative';
-                card.innerHTML = `
-                    ${badge}
-                    <div>
-                        <h4 class="text-lg font-bold mb-1">${p.name}</h4>
-                        <p class="text-sm text-gray-500 mb-3">${p.description}</p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex items-center text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-2">(42)</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center mt-4">
-                        <span class="text-xl font-bold text-[#8D9B6A]">R$${p.price.replace('.',',')}</span>
-                        <div class="text-left ml-4">
-                            <p class="text-sm text-gray-700 font-semibold mb-1">Como usar:</p>
-                            <ul class="list-disc list-inside text-xs text-gray-600 mb-2">
-                                <li>Consulte um profissional de saúde antes de iniciar.</li>
-                                <li>Use conforme orientação do rótulo ou nutricionista.</li>
-                            </ul>
-                            <a href="#guia-exercicios" class="text-[#8D9B6A] underline text-xs font-bold">Ver Guia de Exercícios</a>
-                        </div>
-                    </div>
-                `;
-                productListEl.appendChild(card);
-            });
-        }
-
-        // Event listeners
-        productSearchEl.addEventListener('keyup', (e) => {
-            renderProducts(e.target.value, activeFilter);
-        });
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                activeFilter = button.dataset.filter;
-                renderProducts(productSearchEl.value, activeFilter);
-            });
-        });
-
-        // Add to cart functionality
-        document.addEventListener('click', (e) => {
-        // Função de compra removida
-        });
-
-        // Initialize
-        renderIngredients();
-        renderProducts();
-<section id="guia-exercicios" class="bg-[#8D9B6A]/10 py-16 mt-20">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h3 class="text-3xl font-bold text-[#4A4A4A] mb-6">Guia Complementar de Exercícios</h3>
-            <p class="text-gray-600 mb-8">Combine o uso dos ingredientes naturais com exercícios de baixo impacto para potencializar o alívio das dores articulares.</p>
-            <ul class="list-disc list-inside text-left text-gray-700 space-y-4">
-                <li><strong>Alongamento Matinal:</strong> 5 minutos de alongamento suave para articulações e músculos.</li>
-                <li><strong>Caminhada:</strong> 20 minutos diários, ritmo leve a moderado.</li>
-                <li><strong>Exercícios de fortalecimento:</strong> Use faixas elásticas para fortalecer músculos ao redor das articulações.</li>
-                <li><strong>Yoga ou Pilates:</strong> 2x por semana para flexibilidade e relaxamento.</li>
-                <li><strong>Hidratação:</strong> Beba água antes, durante e após os exercícios.</li>
-            </ul>
-            <p class="text-gray-500 mt-6">Consulte sempre um profissional de saúde antes de iniciar qualquer atividade física.</p>
-        </div>
-    </div>
-</section>
     });
 </script>
